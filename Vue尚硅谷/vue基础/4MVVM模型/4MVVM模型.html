@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <!-- 
+			MVVM模型
+       
+						1. M：模型(Model) ：data中的数据
+						2. V：视图(View) ：模板代码
+						3. VM：视图模型(ViewModel)：Vue实例
+			观察发现：
+						1.data中所有的属性，最后都出现在了vm身上。
+						2.vm身上所有的属性 及 Vue原型上所有属性，在Vue模板中都可以直接使用。
+    MVVM是vue实现数据驱动视图的和双向数据绑定的核心原理
+          + Model表示渲染数据所依赖的数据源
+          + View表示当前页面所渲染的DOM结构
+          + ViewModel表示vue的实例，是核心他把上面两者绑定在一起
+		-->
+  <div id="app"> <!-- View,所有vm上的所有属性都可以看见，原型上所有东西都可以用-->
+   <h1>{{$children}}</h1>
+   
+  </div>
+  <script>
+    //阻止vue在生产模式提示
+    Vue.config.productionTip = false;
+    //new一个vue对象
+  const vm=new Vue({//---->ViewModel
+    data:function(){//--->Model
+      return {
+      }
+    },
+  })
+console.log(vm);
+  vm.$mount('#app');
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.3/echarts.common.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  div {
+    width: 800px;
+    height: 400px;
+    border: 1px solid;
+  }
+</style>
+
+<body>
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <script>
+
+    const dom1 = document.querySelector('.box1')
+    const mycharts1 = echarts.init(dom1)
+    const option1 = {
+      // 图表的标题
+      title: {
+        text: '数据可视化',
+        subtext: 'Echarts基本使用',
+        left: "center"
+      },
+      // x轴的配置项
+      xAxis: {
+        data: ["衣服", "直播", "游戏", "电影"]
+      },
+      // y轴
+      yAxis: {
+        // 显示y轴
+        axisLine: {
+          show: true
+        },
+        // 显示刻度
+        axisTick: {
+          show: true
+        }
+
+      },
+      // 绘制类型配置项
+      series: [
+        {
+          // 图表类型 line折线图，pie饼图
+          type: "bar",
+          // 图表配置项
+          data: [10, 20, 30, 25],
+          color: "red"
+        }
+      ]
+
+    }
+    mycharts1.setOption(option1)
+    let dom2 = document.querySelector('.box2')
+    const mycharts2 = echarts.init(dom2)
+    mycharts2.setOption({
+      title: {
+        text: '折线图',
+        left: 'center',
+        subtext: 'Echarts基本使用',
+        textStyle: {
+          color: 'red'
+        }
+      },
+      xAxis: {
+        data: ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+      },
+      yAxis: {
+        axisLine: {
+          show: true
+        },
+      },
+      series: [
+        {
+          type: 'line',
+          data: [10, 20, 15, 44, 22, 18, 60],
+          color: 'red'
+        }
+      ]
+    })
+  </script>
+</body>
+
+</html>

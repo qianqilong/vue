@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    姓: <input type="text" v-model="firstName"><br>
+    名: <input type="text" v-model="lastName"><br>
+    姓名: <span>{{fullName}}</span>  
+  </div>
+
+</body>
+<script>
+  Vue.config.productionTip = false;//阻止vue启动时生成提示
+
+  const vm = new Vue({
+    data: {
+      firstName:'z',
+      lastName:'s'
+    },
+    computed:{
+    //只用set
+      fullName(){
+       return this.firstName+'-'+this.lastName;
+      } 
+    }
+   
+  })
+  vm.$mount('#app');
+</script>
+
+</html>

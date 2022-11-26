@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin-top: 20px
+    }
+
+    .demo1 {
+      height: 50px;
+      background-color: aqua;
+    }
+
+    .box1 {
+      background-color: pink;
+      padding: 5px;
+    }
+
+    .box2 {
+      background-color: deeppink;
+      padding: 5px;
+    }
+
+    .list {
+      height: 200px;
+      width: 200px;
+      background-color: aqua;
+      overflow: scroll;
+    }
+
+    li {
+      height: 100px;
+    }
+  </style>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 
+				Vue中的事件修饰符：
+						1.prevent：阻止默认事件（常用）；
+						2.stop：阻止事件冒泡（常用）；
+						3.once：事件只触发一次（常用）；
+						4.capture：使用事件的捕获模式；
+						5.self：只有event.target是当前操作的元素时才触发事件；
+						6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
+		-->
+  <div id="app">
+    <h1>Hello {{name}}</h1>
+    <!-- 阻止默认提交行为 -->
+    <a href="https://www.baidu.com" @click.prevent="showInfo">点我提示</a>
+    <!-- 阻止冒泡 -->
+    <div class="demo1" @click="showInfo"><button @click.stop="showInfo">点我提示</button></div>
+    <!-- 事件只触发一次 -->
+    <button @click.once="showInfo">点我提示</button>
+    <!-- 使用事件的捕获模式(捕获阶段就处理事件)-->
+    <div class="box1" @click.capture="showMsg(1)">
+      div1
+      <div class="box2" @click="showMsg(2)">
+        div2
+      </div>
+    </div>
+    <!--只有event.target是当前操作的元素时才触发事件(点击按钮时候冒泡到div上不会触发)  -->
+    <div class="demo1" @click.self="showInfo"><button @click="showInfo">点我提示</button></div>
+    <!-- 事件的默认行为立即执行，无需等待事件回调执行完毕； -->
+    <ul class="list" @wheel.passive="demo"> 
+      <!-- scroll滚动条的滚动，wheel鼠标滚轮滚动 -->
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+  </div>
+  <script>
+    //阻止vue在生产模式提示
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+      data() {
+        return {
+          name: 'Jack'
+        }
+      },
+      methods: {
+        showInfo(e) {
+          console.log(e.target);
+          alert('hello')
+        }
+        , showMsg(msg) {
+          alert(msg)
+        },
+        demo(){
+       for(let i=0;i<10000;i++){
+         console.log('#');
+       }
+       console.log('哈哈！');
+        }
+      },
+    })
+    vm.$mount('#app');
+
+  </script>
+</body>
+
+</html>

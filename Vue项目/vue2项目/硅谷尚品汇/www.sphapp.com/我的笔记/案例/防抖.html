@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>
+    百度：<input type="text" name="" id=""></p>
+    <button>111</button>
+    <script>
+      /**
+* @desc 函数防抖
+* @param func (function) 函数
+* @param wait (number) 延迟执行毫秒数
+* @param immediate (boolean) true 表立即执行，false 表非立即执行
+*/
+_.debounce = function (func, wait, immediate) {
+    var timeout, result;
+
+    var later = function (context, args) {
+        timeout = null;
+        if (args) result = func.apply(context, args);
+    };
+
+    var debounced = restArgs(function (args) {
+        if (timeout) clearTimeout(timeout);
+        if (immediate) {
+            var callNow = !timeout;
+            timeout = setTimeout(later, wait);
+            if (callNow) result = func.apply(this, args);
+        } else {
+            timeout = _.delay(later, wait, this, args);
+        }
+
+        return result;
+    });
+
+    debounced.cancel = function () {
+        clearTimeout(timeout);
+        timeout = null;
+    };
+
+    return debounced;
+};
+  
+/*
+    每次输入就清除定时器,一直输入就一直清除,
+    下面的console.log就永远不会触发,
+      直到你不输入一秒后才触发 
+      */
+      let timer;
+      const input=document.querySelector('input')
+      input.addEventListener('input',()=>{
+          clearTimeout(timer);
+          timer=setTimeout(()=>{
+          console.log('发送请求');
+          },1000)
+      })
+    
+      let timer1;
+      const btn=document.querySelector('button')
+      btn.addEventListener('click',()=>{
+        clearTimeout(timer1)
+     timer1=   setTimeout(()=>{
+          console.log('发送请求');
+        },1000)
+      })
+    </script>
+</body>
+
+</html>

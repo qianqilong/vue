@@ -1,0 +1,52 @@
+
+     <!DOCTYPE html>
+     <html lang="en">
+     
+     <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Document</title>
+       <script src="../js/vue.js"></script>  
+     </head>  
+     <body>
+       <div id="app">
+         <h2>人员列表</h2>
+         <input type="text" placeholder="请输入名字" v-model="search">
+         <button @click="sortType=2">年龄升序</button>
+         <button @click="sortType=1">年龄降序</button>
+         <button @click="sortType=0">原顺序</button>
+       <ul>
+         <li v-for="item in filPersons"  :key="item.id">{{item.name}}--{{item.age}}--{{item.sex}}</li>
+       </ul>
+       </div>
+     </body>
+     <script>
+       Vue.config.productionTip = false;//阻止vue启动时生成提示
+       const vm = new Vue({
+         data: {
+           sortType:0,//0原序，1降序，2升序
+          persons:[
+            {id:'001',name:'马冬梅',age:18,sex:'女'},
+            {id:'002',name:'周冬雨',age:19,sex:'女'},
+            {id:'003',name:'周杰伦',age:20,sex:'男'},
+            {id:'004',name:'温兆伦',age:21,sex:'男'},
+          ],
+          search:''
+         },
+      computed:{
+        filPersons(){
+         let arr=this.persons.filter(item=>item.name.indexOf(this.search)!==-1);
+              if(this.sortType){
+                arr.sort((a,b)=>{
+                    return this.sortType===1 ? b.age-a.age:a.age-b.age;
+                })
+              }
+              return arr;
+        }
+      }
+       })
+       vm.$mount('#app');
+     </script>
+     
+     </html>

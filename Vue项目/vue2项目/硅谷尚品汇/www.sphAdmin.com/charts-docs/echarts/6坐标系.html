@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    * {
+      width: 800px;
+      height: 400px;
+    }
+  </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.3/echarts.common.js"></script>
+</head>
+
+<body>
+  <div id="echarts"></div>
+  <div id="echarts1"></div>
+  <script>
+    const mycharts = echarts.init(document.querySelector('#echarts'))
+    const mycharts1 = echarts.init(document.querySelector('#echarts1'))
+    // 指定图表的配置项
+     mycharts.setOption({
+      title:{
+        text:'一个坐标系'
+      },
+      xAxis:{},
+      yAxis:{},
+      series:[
+        {
+          type:"scatter",
+          data:[
+            [10,20],
+            [13,66],
+            [50,9],
+            [20,11],
+            [30,21],
+            [40,50]
+          ]
+        }
+      ]
+     })
+     mycharts1.setOption({
+       title:{
+         text:'双坐标系'
+       },
+       xAxis:{
+        data: ["衣服", "直播", "游戏", "电影"]
+       },
+       yAxis:[{
+          // 显示y轴
+        axisLine: {
+          show: true
+        },
+       },{
+          // 显示y轴
+        axisLine: {
+          show: true
+        },
+        // 显示刻度
+        axisTick: {
+          show: true
+        }
+       }],
+       series:[
+         {
+           type:'bar',
+           data:[10,20,30,40],
+           yAxisIndex:0
+         },
+         {
+           type:'line',
+           data:[6,10,15,30],
+           yAxisIndex:1
+         }
+       ]
+     })
+      
+  </script>
+</body>
+
+</html>

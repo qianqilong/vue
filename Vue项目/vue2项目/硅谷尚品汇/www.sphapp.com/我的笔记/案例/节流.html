@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ <h1> <span>0</span></h1>
+  <button>+1</button>
+  <script>
+    /**
+* @desc 函数节流
+* @param func (function) 函数
+* @param wait (number) 延迟执行毫秒数
+* @param type  (number) 1 表时间戳版，2 表定时器版
+*/
+function throttle(func, wait ,type) {
+    if(type===1){
+        var previous = 0;
+    }else if(type===2){
+        var timeout;
+    }
+
+    return function() {
+        var context = this;
+        var args = arguments;
+        if(type===1){
+            var now = Date.now();
+
+            if (now - previous > wait) {
+                func.apply(context, args);
+                previous = now;
+            }
+        }else if(type===2){
+            if (!timeout) {
+                timeout = setTimeout(function(){
+                    timeout = null;
+                    func.apply(context, args)
+                }, wait)
+            }
+        }
+
+    }
+}
+    // 在规定时间间隔范围不会重复触发回调，只有大于这个时间才会触发
+    const span =document.querySelector('span')
+    const btn=document.querySelector('button')
+    let count=0
+    let pre=0// 开始时间 
+    let wait=1000 // 一秒钟只能触发一次
+    /* 时间戳版本
+     btn.addEventListener('click',function(){
+       var now = Date.now();// 现在时间
+       if (now - pre > wait) {
+       count++;
+       span.innerHTML=count
+       pre = now;// 时间改变
+       }
+     })*/
+
+    // 定时器版本
+    let timer
+    btn.addEventListener('click',function(){
+  if(!timer){
+    timer=setTimeout(()=>{
+   timer=null
+   count++;
+       span.innerHTML=count
+    },1000)
+  }
+    })
+  </script>
+</body>
+</html>

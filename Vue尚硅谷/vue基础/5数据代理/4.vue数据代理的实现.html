@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 数组的响应 -->
+    <input type="text" id="ipt">
+    <p id='op'></p>
+    <!-- 对象的响应  -->
+    <input type="text" id="iptj">
+    <p id='opj'></p>
+    <script>
+        function Observer(obj) {
+            const keys = Object.keys(obj)
+            keys.forEach((key) => {
+                Object.defineProperty(this,key,{
+                    get() {
+                        console.log('get方法被调用了');
+                        return obj[key]
+                    },
+                    set(val) {
+                        console.log('set方法调用了')
+                        obj[key] = val
+                    }
+                })
+            })
+        }
+        const obs = new Observer([1,2,3])
+        const ipt = document.querySelector('#ipt')
+        ipt.value = obs[1]
+        document.querySelector('#op').innerHTML = obs[1]
+        ipt.addEventListener('input',function (e) {
+            obs[1] = e.target.value
+            document.querySelector('#op').innerHTML = obs[1]
+        })
+
+     const obj = new Observer({a:1,b:2})
+     
+     const iptj = document.querySelector('#iptj')
+     iptj.value = obj.a
+     document.querySelector('#opj').innerHTML = obj.a
+     iptj.addEventListener('input',function (e) {
+         obj.a = e.target.value
+         document.querySelector('#opj').innerHTML = obj.a
+     })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    canvas{
+    
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <!-- html5新增一个双闭合标签 默认宽高300*150,
+    浏览器认为canvas标签是一张图片,
+    标签里面不能加任何标签和文字没有效果
+   canvas标签是通过width|height,不能用style样式设置宽高
+   canvas操作是通过js完成
+  -->
+  <canvas id="canvas" height="400" width="600" ></canvas>
+  <script>
+   /** @type {HTMLCanvasElement} */
+    const canvas=document.querySelector('#canvas')
+    // canvas获取画布的上下文(笔)
+    let ctx=canvas.getContext('2d')
+    console.log(ctx);
+    // 绘制线段
+    // 起点
+    ctx.moveTo(100,100)
+    // 其他点多个
+    ctx.lineTo(200,200)
+    ctx.lineTo(100,200)
+    // 设置填充色
+    ctx.fillStyle="red"
+    ctx.fill()
+    // 设置线段颜色和宽度
+    ctx.strokeStyle="pink"
+    ctx.lineWidth="10"
+    ctx.closePath()
+    
+    // 绘制线段
+    ctx.stroke()
+  </script>
+</body>
+</html>

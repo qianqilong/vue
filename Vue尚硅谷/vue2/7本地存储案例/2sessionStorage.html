@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="btn">保存内部存储</button>
+  <button class="btn">读取内部存储</button>
+  <button class="btn">删除内部存储</button>
+  <button class="btn">清空内部存储</button>
+  <script>
+    const btn=document.querySelectorAll('.btn');
+    let person={name:'zs',age:18}
+
+    btn[0].addEventListener('click',function(){
+    sessionStorage.setItem('msg','hello Jack')
+    sessionStorage.setItem('person',JSON.stringify(person))
+    })
+    btn[1].addEventListener('click',function(){
+      console.log(sessionStorage.getItem("msg")); 
+     console.log( sessionStorage.getItem ("person")); 
+    })
+    btn[2].addEventListener('click',function(){
+        sessionStorage.removeItem('msg');
+    })
+    btn[3].addEventListener('click',function(){
+        sessionStorage.clear();
+    })
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title></title>
+  <!-- 引入Vue -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 
+				1.一个重要的内置关系：VueComponent.prototype.__proto__ === Vue.prototype
+        (vue让VueComponent原型对象指向了Vue的原型对象)
+				2.为什么要有这个关系：让组件实例对象（vc）可以访问到 Vue原型上的属性、方法。
+		-->
+  <div id="app">
+  <img src="./VueComponent和vue关系.png" alt="">
+  <hello></hello>
+  
+  <!--new VueComponent  -->
+  </div>
+</body>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示
+  // 创建一组件
+  Vue.prototype.x=99;
+  const hello = Vue.extend({
+    template: `<div><button @click="showX">输出x</button></div>`,
+    data() {
+      return {
+        msg: 1
+      }
+    },
+    methods: {
+      showX(){
+        console.log(this.x);
+      }
+    },
+  });
+
+  const vm = new Vue({
+    components: {
+      hello,
+    }
+  }).$mount('#app');
+  console.log(vm);
+  console.dir(hello);
+  console.log(hello.prototype.__proto__===Vue.prototype);
+/*
+  function Demo() {
+    this.a = 1;
+    this.b = 2
+  }
+  const d = new Demo();
+
+  console.log(Demo.prototype);//显示原型属性
+  console.log(d.__proto__);//隐私原型属性
+  console.log(Demo.prototype == d.__proto__);
+  //通过显示原型属性追加x属性
+  Demo.prototype.x = 99;
+  console.log('@', d);
+
+*/
+</script>
+
+</html>

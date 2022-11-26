@@ -1,0 +1,26 @@
+     <!DOCTYPE html>
+     <html lang="en">     
+     <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Document</title>
+       <script src="../js/vue.js"></script>  
+     </head>  
+     <body>
+       <div id="app">
+       <h2>Hello {{name}}</h2>
+       </div>
+     </body>
+     <script>
+       Vue.config.productionTip = false;//阻止vue启动时生成提示
+       const vm = new Vue({
+         data: {
+         name:'Jack'
+         },// vm._data中的data被加工了(加set,get),修改name就会调用set,重新解析模板
+
+       })
+       vm.$mount('#app');
+     </script>
+     
+     </html>

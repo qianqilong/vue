@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    * {
+      width: 800px;
+      height: 400px;
+    }
+  </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.3/echarts.common.js"></script>
+</head>
+
+<body>
+  <div id="echarts"></div>
+  <script>
+    const mycharts = echarts.init(document.querySelector('#echarts'))
+    // 指定图表的配置项
+    mycharts.setOption({
+      // 图表的标题
+      title: {
+        text: '数据可视化',
+        subtext: 'Echarts基本使用',
+        left: "center"
+      },
+      // x轴的配置项
+      xAxis: {
+        data: ["衣服", "直播", "游戏", "电影"]
+      },
+      // y轴
+      yAxis: {
+        // 显示y轴
+        axisLine: {
+          show: true
+        },
+        // 显示刻度
+        axisTick: {
+          show: true
+        }
+
+      },
+      // 数据集
+      dataset: {
+        source: [
+          ["衣服", 10],
+          ["直播", 20],
+          ["游戏", 30],
+          ["电影", 40]
+        ]
+      },
+      // 绘制类型配置项
+      series: [
+        //柱形图
+        {
+          // 图表类型 line折线图，pie饼图
+          type: "bar",
+          // 图表配置项
+          color: "red",
+          // 指定用的是那一段数据
+          encode: {
+            y: 1 //数据集索引值唯一
+          }
+        },
+        // 折线图
+        {
+          type: 'line',
+          color: 'pink',
+          encode: {
+            y: 1 //数据集索引值唯一
+          }
+        },
+        {
+          type: 'pie',
+          left: 100,
+          width: 200,
+          height: 200,
+          radius: 25,
+          encode:{
+            itemName:0, //文字索引
+            value:1 // 数据索引
+          }
+        }
+      ]
+
+    })
+  </script>
+</body>
+
+</html>

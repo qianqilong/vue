@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let data={
+      name:'zs'
+    }
+    // Object.defineProperty(data,'name',{
+    //   get(){
+    //     return data.name;
+    //   }//无限递归
+    //   ,set(val){
+    //       data.name=val;
+    //   }//无限递归
+    // })
+
+    // 创建一个监视的实例对象，用于监测data中属性的变化
+    const obs=new Observer(data);
+ 
+     let vm={};
+     vm._data=obs;
+
+    function Observer(obj){
+    //汇总对象中所有属性形成一个数组
+    const keys=Object.keys(obj);
+    //遍历
+    keys.forEach((key)=>{
+      Object.defineProperty(this,key,{
+         get(){
+             return obj[key];
+         },
+         set(val){
+          console.log(`${key}被改了，我要去解析模板，生成虚拟DOM.....我要开始忙了`)
+         obj[key]=val;
+         }
+      })
+    })
+    }
+  </script>
+</body>
+</html>

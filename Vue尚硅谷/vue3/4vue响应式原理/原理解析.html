@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    //源数据
+    let person1 = {
+      name: 'zs',
+      age: 18
+    }
+
+    //模拟vue2中的原理
+    let p = {};
+    // p中可以进行响应
+    Object.defineProperty(p, 'name', {
+      get() {
+        return person1.name
+      },
+      set(value) {
+        console.log('有人修改了person中的数据,我要更新数据');
+        person1.name = value
+      }
+    })
+    Object.defineProperty(p, 'age', {
+      get() {
+        return person1.age
+      },
+      set(value) {
+        console.log('有人修改了person中的数据,我要更新数据');
+        person1.name = value
+      }
+    })
+
+
+    //源数据
+    let person2 = {
+      name: 'zs',
+      age: 18
+    }
+
+    //模拟vue3中的原理,Proxy数据p1修改persom2中的数据也可以跟着变动
+
+    
+    //1.普通方法
+    //#region
+  /*  const p1 = new Proxy(person2, {
+      // 有人读取属性时调用
+      get(target, item) {
+        console.log(`有人读取p1身上${item}的属性`);
+        return target[item]
+      },
+      // 有人修改增加属性时调用
+      set(target, item, value) {
+        console.log(`有人修改了p1身上的${item}属性，修改值是${value}`);
+        target[item] = value;
+      },
+      // 有人删除属性时调用
+      deleteProperty(target, item) {
+        console.log(`有人删除了p1身上的${item}属性`);
+        return delete target[item]
+      },
+
+    })*/
+  //#endregion
+
+
+    let obj={a:1,b:2};
+
+    //Reflect反射对象，上面有Object的api
+    Reflect.defineProperty(obj,'c',{
+      get(){
+        return 3
+      }
+    })//返回的值是操作是否成功了
+
+
+// 2.Reflect方法
+    const p1 = new Proxy(person2, {
+      // 有人读取属性时调用
+      get(target, item) {
+        console.log(`有人读取p1身上${item}的属性`);
+        return Reflect.get(target,item)
+      },
+      // 有人修改增加属性时调用
+      set(target, item, value) {
+        console.log(`有人修改了p1身上的${item}属性，修改值是${value}`);
+       Reflect.set(target,item,value)
+      },
+      // 有人删除属性时调用
+      deleteProperty(target, item) {
+        console.log(`有人删除了p1身上的${item}属性`);
+        return  Reflect.deleteProperty(target,item) 
+      },
+
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+
+     <!DOCTYPE html>
+     <html lang="en">
+     
+     <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Document</title>
+       <script src="../js/vue.js"></script>  
+       <script src="./day.js"></script>
+     </head>  
+     <body>
+       <div id="app">
+        <h2>显示格式化后的时间  </h2>
+        <h2>计算属性 {{fmttime}}</h2>
+        <h2>函数实现 {{gettime()}}</h2>
+        <h2>过滤器 {{time | timeFor() | myslice}}</h2>
+       </div>
+     </body>
+     <script>
+       Vue.config.productionTip = false;//阻止vue启动时生成提示
+         //   当全局过滤器与私有过滤器冲突则调用私有
+         Vue.filter('myslice',function (val){
+        
+            return val.slice(0,4)
+          })
+       const vm = new Vue({
+         data: {
+         time:Date.now()
+         },
+         methods: {
+          gettime(){
+            return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+          }
+         },
+      
+         computed:{
+           fmttime:{
+             get(){
+               return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+             }
+           }
+         },
+         //局部过滤器
+         filters:{
+          timeFor(val,str='YYYY-MM-DD HH:mm:ss'){
+            return dayjs(val).format(str)
+          },
+         
+         }
+        })
+
+       vm.$mount('#app');
+     </script>
+     
+     </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">     
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>  
+</head>  
+<body>
+  <div id="app">
+  <button @click="addsex">添加性别</button>
+  <button @click="addhobby">添加爱好</button>
+  <h2>学生姓名:{{stu.name}}</h2>
+  <h2>年龄: 真实:{{stu.age.rage}} 对外:{{stu.age.sage}}</h2>
+  <h2 v-if="stu.sex">性别: {{stu.sex}}</h2>
+  <h2>朋友们</h2>
+  <ul>
+    <li v-for="(item,index) in stu.friends">{{item.name}}--{{item.age}}</li>
+  </ul>
+  <h2>爱好</h2>
+  <ul>
+    <li v-for="(item,index) in stu.hobby">{{item}}</li>
+  </ul>
+  </div>
+</body>
+<script>
+  Vue.config.productionTip = false;//阻止vue启动时生成提示
+  const vm = new Vue({
+    data: {
+    stu:{
+     name:'zs',
+     age:{
+       rage:40,
+       sage:29,
+     },
+     hobby:['抽烟','喝酒','烫头'],
+     friends:[
+       {name:'jerry',age:35},
+       {name:'tony',age:36}
+     ]
+    }
+    },// vm._data中的data被加工了(加set,get),修改name就会调用set,重新解析模板
+methods: {
+  addsex(){
+    // Vue.set(this.stu,'sex','男');
+    this.$set(this.stu,'sex','男');//只能给对象添加属性不能向data直接添加属性
+  },
+  addhobby(){
+    this.stu.hobby.push('打架');
+    // 这里的push不等于原型对象的push,它进行了加工(重新渲染模板)
+    Vue.set(this.stu.hobby,1,'打台球')//或者vm.$set
+  }
+},
+  })
+  vm.$mount('#app');
+</script>
+
+</html>

@@ -1,0 +1,80 @@
+lookComFn () {
+      // 点击 - 显示评论区顶端
+      // 1. 点击"直接"滚动过去
+      // 思路: window.scollTo 设置Y轴滚动值, 滚动值就是文章内容的高度
+      // window.scollTo(x坐标, y坐标) - 把滚动条滚动到指定位置 (左上角是0, 0)
+      // window.scrollTo(0, document.querySelector('.article-container').offsetHeight)
+
+      // 2. 点击滚动带动画(JS动画)
+      // const now = window.scrollY // 获取当前评论已经滚出去(卷起)的Y值
+      // const dist = document.querySelector('.article-container').offsetHeight // 文章高度-就是你要滚动的距离
+      // const step = dist / 10 // 步长(一次迈(滚动)出去的距离)
+
+      // setTimeout(() => {
+      //   if (dist < now + step) {
+      //     return
+      //   }
+      //   window.scrollTo(0, now + step) // 在上一次滚动的距离+本次要滚的
+      //   this.lookComFn()
+      // }, 300)
+
+      // 3. 缓冲动画(先快后慢)(在上面滚动到下面)
+      // 总结: 计算剩下"未"滚的距离/10, 每次步长
+      // const now = window.scrollY // 已(卷起)的Y值(每次都变)
+      // const dist = document.querySelector('.article-container').offsetHeight // 文章高度-就是你要滚动的距离(每次固定)
+      // const step = (dist - now) / 10 // 剩余要走的值/10 (10可以随便写, 但是10左右效果最好的) - 剩余要走的这次步长
+      // // 第一次now: 0, dist: 1000, step: 100
+      // // 第二次now: 100, dist:1000, step: 90
+      // // 第三次now: 190, dist:1000, step: 81
+      // // .......  step: 0.6 一直不动了
+      // setTimeout(() => {
+      //   if (step < 1) { // 判断是否滚动结束
+      //     window.scrollTo(0, dist) // 动画停止了, 把文章高度设置为卷入值(精度对准)
+      //     return
+      //   }
+      //   window.scrollTo(0, now + step) // 在上一次滚动的距离+本次要滚的
+      //   this.lookComFn() // 递归->为了下次再滚动一次
+      // }, 10)
+
+      // 4. 动画(下到上滚动)
+      // const now = window.scrollY
+      // const dist = document.querySelector('.article-container').offsetHeight
+      // const step = (dist - now) / 10
+      // console.log(step)
+      // setTimeout(() => {
+      //   if (Math.abs(step) < 1) { // 判断是否滚动结束-步长值, 迈不动小于1停止 (step < 1 && step > 0)
+      //     window.scrollTo(0, dist) // 动画停止了, 把文章高度设置为卷入值(精度对准)
+      //     return
+      //   }
+      //   window.scrollTo(0, now + step)
+      //   this.lookComFn()
+      // }, 10)
+
+      // 5. (无评论-文章足够长看文章id:23626)
+      // (重要): window.scrollTo(), 无论设置多少, 不能让网页中间留白(看ppt第二章最后)
+      // now值不会变, step也不会往下减到小于1, 一直递归
+      const now = window.scrollY // 0
+      let dist = document.querySelector('.article-container').offsetHeight // 326
+      // 文章高度 - 可视窗口高度 (剩余可以滚动距离)
+      // dist, 大于了上面的剩余可滚动距离, 把dist设置为剩余可以滚动的距离
+      // 文章高度, 会少滚动一个顶部导航的距离
+      // if (document.querySelector('.article-container').offsetHeight - window.innerHeight < dist) {
+      //   dist = document.querySelector('.article-container').offsetHeight - window.innerHeight
+      // }
+      // 文档高度 - 可视窗口高度
+      // dist >上面剩余可滚动距离, 把dist设置为剩余可滚动距离
+      if (dist > document.documentElement.scrollHeight - window.innerHeight) {
+        dist = document.documentElement.scrollHeight - window.innerHeight
+      }
+      const step = (dist - now) / 10
+      console.log(step)
+      setTimeout(() => {
+        if (Math.abs(step) < 1) {
+          // 判断是否滚动结束-步长值, 迈不动小于1停止 (step < 1 && step > 0)
+          window.scrollTo(0, dist) // 动画停止了, 把文章高度设置为卷入值(精度对准)
+          return
+        }
+        window.scrollTo(0, now + step)
+        this.lookComFn()
+      }, 10)
+    }

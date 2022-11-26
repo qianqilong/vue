@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title></title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+  
+		<div id="root">
+      <!-- 使用组件 -->
+   
+     
+   
+		</div>
+	</body>
+  
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示
+ //创建hello组件
+ const hello=Vue.extend({
+   template:'<h2>{{msg}}</h2>',
+  data() {
+    return {
+      msg:'欢迎您~'
+    }
+  }, 
+
+ });
+ //创建stu组件
+    const stu=Vue.extend({
+   template:`
+   <div><h2>学生姓名：{{stuName}}</h2>
+     <h2>学生年龄：{{age}}</h2></div>
+     `,
+  data() {
+     return {
+      stuName:'刘小龙',
+      age:21
+     }
+ }})
+ // 创建school组件
+ const school=Vue.extend({
+   template:`
+   <div> <h2>学校名称：{{school}}</h2>
+     <h2>学校地址：{{address}}</h2> 
+     <button @click="showName">点我提示</button>
+     <stu></stu>
+     </div>`,
+    //组件注册在哪里那个模板里使用
+     components:{
+       stu
+     },
+  data() {
+     return {
+       school:'安徽科技学院',
+       address:'龙子湖校区',
+     }
+     },
+     methods: {
+       showName(){
+         alert(this.school)
+       }
+     },
+ });
+// 定义app组件
+const app=Vue.extend({
+  template:`
+  <div>
+  <school></school>
+     <hello></hello>
+     </div>
+  `,//写在组件中不能大写首字母
+  components:{
+    school,
+  hello,
+  }
+})
+// 管理组件 
+new Vue({
+   template:`<app></app>`,
+      //注册组件(局部)
+	   components:{
+       app
+     }
+		}).$mount('#root');
+
+
+
+	</script>
+</html>

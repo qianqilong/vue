@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    canvas{
+       margin: 100px 400px ;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <!-- html5新增一个双闭合标签 默认宽高300*150,
+    浏览器认为canvas标签是一张图片,
+    标签里面不能加任何标签和文字没有效果
+   canvas标签是通过width|height,不能用style样式设置宽高
+   canvas操作是通过js完成
+  -->
+  <canvas id="canvas" height="400" width="800" ></canvas>
+  <script>
+   /** @type {HTMLCanvasElement} */
+    const canvas=document.querySelector('#canvas')
+    const ctx=canvas.getContext('2d')
+    // 绘制文字
+    ctx.font="20px 微软雅黑"
+    ctx.fillText('数据可视化',30,30)
+    // 绘制x,y轴
+    ctx.moveTo(100,50)
+    ctx.lineTo(100,350)
+    ctx.fillText('0',80,350)
+    ctx.lineTo(700,350)
+    ctx.stroke()
+
+    // 绘制其他线段
+    
+    ctx.moveTo(100,50)
+    ctx.lineTo(700,50)
+    ctx.fillText('150',60,50)
+ 
+    ctx.moveTo(100,110)
+    ctx.lineTo(700,110)
+    ctx.fillText('120',60,110)
+ 
+    ctx.moveTo(100,170)
+    ctx.lineTo(700,170)
+    ctx.fillText('90',70,170)
+   
+    ctx.moveTo(100,230)
+    ctx.lineTo(700,230)
+    ctx.fillText('60',70,230)
+    
+    ctx.moveTo(100,290)
+    ctx.lineTo(700,290)
+    ctx.fillText('30',70,290)
+    ctx.stroke()
+    // 分界线
+    ctx.moveTo(100,350)
+    ctx.lineTo(100,360)
+   ctx.fillText('食品',160,370)
+    ctx.moveTo(250,350)
+    ctx.lineTo(250,360)
+    ctx.fillText('数码',310,370)
+
+    ctx.moveTo(400,350)
+    ctx.lineTo(400,360)
+    ctx.fillText('服饰',460,370)
+
+    ctx.moveTo(550,350)
+    ctx.lineTo(550,360)
+    ctx.fillText('箱包',610,370)
+
+    ctx.moveTo(700,350)
+    ctx.lineTo(700,360)
+    ctx.stroke()
+
+    // 绘制矩形
+    ctx.fillStyle="red" // 填充颜色在绘制前面
+    ctx.fillRect(125,140,100,210)
+    ctx.fillRect(275,110,100,240)
+    ctx.fillRect(425,170,100,180)
+    ctx.fillRect(575,50,100,300)
+  </script>
+</body>
+</html>

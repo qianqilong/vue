@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d2089df"],{a60d:function(n,e,r){"use strict";r.r(e);var t=function(){var n=this,e=n.$createElement,r=n._self._c||e;return r("div",[n._v(" 我是团购订单 ")])},u=[],a={name:"groupOrder"},c=a,l=r("2877"),d=Object(l["a"])(c,t,u,!1,null,null,null);e["default"]=d.exports}}]);

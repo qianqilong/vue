@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    svg {
+      width: 800px;
+      height: 800px;
+    }
+  </style>
+</head>
+
+<body>
+  <svg class="box">
+    <!-- 画线段 -->
+    <line x1="100" y1="100" x2="200" y2="200" stroke="red" stroke-width="20"></line>
+    <!-- 绘制折线 -->
+    <polyline points="300 300,50 100,120 400" fill-opacity="0" stroke="cyan"></polyline>
+    <!-- 绘制矩形 fill-opacity设置填充颜色的透明度，stroke绘制线的颜色-->
+    <rect x="400" y="400" width="150" height="50" fill="pink"></rect>
+    <!-- 绘制圆形 -->
+    <circle cx='70' cy='95' r='50' style='stroke:black; fill:none'></circle>
+    <!-- cx cy 圆心点坐标 rx x轴半径 ry y轴半径-->
+    <ellipse cx="" cy="" rx="" ry="" style="fill:black;"></ellipse>
+    <!-- 多边形 -->
+    <polygon points="600 100, 300 400, 750 100" fill-opacity="0" stroke="cyan" />
+    <!--M 移动到初始位置L 画线 Z 将结束和开始点闭合
+-->
+    <path d="
+  M 10 10
+  L 20 400
+  L 30 120
+  L 40 99
+  L 60 80
+  L 80 50
+  L 90 100
+  Z
+" fill-opacity="0" stroke="cyan"></path>
+  </svg>
+</body>
+
+</html>

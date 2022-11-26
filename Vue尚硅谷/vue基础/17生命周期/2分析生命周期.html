@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>v-text指令</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+
+		
+		<div id="app">
+    <h2>当前的n值是{{n}}</h2>
+		<button @click="add">+1</button>
+		<button @click="bye">销毁</button>
+		</div>
+	</body>
+  
+	<script type="text/javascript">
+		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示
+		new Vue({
+			data:{
+	    n:1
+			},
+			methods: {
+				add(){
+					//销毁后仍然可以触发，当时已经无法操作data中的n
+					console.log("add");
+					this.n++;
+				},
+			bye(){
+				console.log('bye');
+			this.$destroy()	
+			}	
+			},
+			/*
+			1.beforeCreate
+			此时还未进行数据代理，还未收集数据，vm身上无_data和methods
+			2.created
+			此时已经进行了数据代理,数据都可用但是页面没有渲染，(一般发Ajax请求数据渲染在这里)
+			3.beforeMount
+			已经生成但是是在内存中，没有渲染出来,呈现是未经过vue编译的dom,操作未编译的dom，最后都会被vue中vm.$el替换了
+			4.mounted(重要)
+			页面呈现的是vm.$el上的真实dom,发送ajax请求，绑定事件，开启定时器
+      5.beforeUpdate
+			数据是新的，但是页面是旧的，没有解析替换到页面,vm.$el(是真实的dom)中的页面还没有替换
+			6.updated
+			页面和数据已经保持了同步
+			7.beforeDestroy(重要)
+			调用了vm.$destroy才会触发，销毁之前的动作，销毁和不会删除dom,不会销毁dom事件,如果在这个阶段进行更新，没有触发更新
+	    8.destroyed
+			*/
+      beforeCreate() {},
+			created() {console.log(this.n);},
+      beforeMount() {},
+			mounted() {console.log(this.$el instanceof HTMLElement);},
+			beforeUpdate() {console.log(this.$el );},
+			updated() {},
+			beforeDestroy() {},
+			destroyed() {},
+		}).$mount('#app');
+ 
+ 
+	</script>
+</html>

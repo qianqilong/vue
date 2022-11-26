@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="../../node_modules/axios/dist/axios.js"></script>
+  <script>
+    /*
+   // 3. 知识点 - 项目打包
+// (1): 运行yarn build 打包命令, 产生dist文件->src下跟main.js有引入关系的打包输出到dist下
+// (2): 尝试用vscode中LiveServer网页运行插件(内置启动:5500网页浏览服务)
+// LiveServer插件会把工作区(vscode编辑器根目录当做服务器根目录)
+// 问题: 打开的index.html网页空白, 控制台全是404错误
+// 原因: 打包时, webpack在index.html中引入其他的打包文件路径全是/服务器根路径请求
+// 运行时, 是在5500端口下运行, 服务器根目录没有css和js文件夹, 而是在index.html文件的隔壁(相对路径)
+// 解决: 让webpack打包时, 引入其他文件要以./开头, 而不能以/开头
+// 在vue.config.js配置项目中, 加入publicPath: './' 重新打包
+// 打包后观察index.html中 其实./被省略了
+// 最后, 只需要把dist文件夹, 发给后端/运维工程师(专门管服务器的)->上线部署
+
+// 打包后产物介绍
+// 名字对应.vue中js和css代表, 懒加载所以分散打包
+// js中有.map文件: 记录了你打包之前代码的行数和列数
+// 原因: 线上环境报错, 因为运行的js压缩成了1行, 报错在第一行
+// 无法寻找代码打包之前的位置, 无法定位代码错误行数
+// .map文件作用 辅助你查找代码报错的行数和列数 (灵魂地图)
+
+// 打包后跨域问题
+// 情况1: 后端直接开启了cors (黑马头条就是这样)
+// 开发环境, 生产打包环境(以后部署), 都可以直接访问接口, 无需考虑跨域问题
+// 隐患: 后端接口暴露了, 任何人找到都可以直接请求(有风险)
+// 解决: 需要登录(页面登录)+token调用接口
+
+// 情况2: 后端不开启cors (网易云音乐/网易新闻/以后我公司后台接口)
+// 开发环境: webpack开发服务器做, 代理转发(yarn serve)
+// 开发环境: nodejs+express在本地搭建一个服务器, 代理转发
+
+// 生产环境(yarn build)打包dist文件, 和webpack开发服务器环境, 无任何关系了, 没有人给你转发了
+// 解决方案1: 把你自己搭建的nodejs+webpack在本地搭建的代理服务器和dist一起部署到一个云服务器上
+// 前端dist -> nodejs+express服务器地址(http-server包) -> 请求真正的后台接口
+// 解决方案2: dist和你公司的后台接口服务, 直接放在一个云服务器上(避免跨域访问)
+    */
+
+    // 打包分析指令 yarn build --report
+    // 直接请求会报跨域错误
+    axios({
+      url: 'api/nc/article/headline/T1348647853363/0-40.html'
+    }).then(res => {
+      console.log(res);
+    })
+  </script>
+</body>
+
+</html>

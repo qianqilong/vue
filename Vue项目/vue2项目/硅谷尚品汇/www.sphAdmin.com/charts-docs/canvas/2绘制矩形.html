@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    canvas{
+    
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <!-- html5新增一个双闭合标签 默认宽高300*150,
+    浏览器认为canvas标签是一张图片,
+    标签里面不能加任何标签和文字没有效果
+   canvas标签是通过width|height,不能用style样式设置宽高
+   canvas操作是通过js完成
+  -->
+  <canvas id="canvas" height="800" width="1200" ></canvas>
+  <script>
+   /** @type {HTMLCanvasElement} */
+    const canvas=document.querySelector('#canvas')
+    const ctx=canvas.getContext('2d')
+    // 绘制矩形第一种方法x,y,w,h 没有办法绘制颜色
+    ctx.strokeRect(100,100,200,100)
+    // 绘制矩形的第二种方法
+    ctx.fillStyle="red" // 填充颜色在绘制前面
+    ctx.fill()
+    ctx.fillRect(400,100,200,100)
+  </script>
+</body>
+</html>

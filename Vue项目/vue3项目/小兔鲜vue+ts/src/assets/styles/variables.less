@@ -1,0 +1,34 @@
+// 主题
+@xtxColor:#27BA9B;
+// 辅助
+@helpColor:#E26237;
+// 成功
+@sucColor:#1DC779;
+// 警告
+@warnColor:#FFB302;
+// 价格
+@priceColor:#CF4444;
+// 鼠标经过上移阴影动画
+.hoverShadow () {
+    transition: all .5s;
+    &:hover {
+      transform: translate3d(0,-3px,0);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+  }
+
+  .fade-right-enter-to,
+.fade-right-leave-from{
+  opacity: 1;
+  transform: none;
+}
+.fade-right-enter-active,
+.fade-right-leave-active{
+  transition: all .5s;
+}
+.fade-right-enter-from,
+.fade-right-leave-to{
+  opacity: 0;
+  transform: translate3d(20px,0,0);
+}
+  
